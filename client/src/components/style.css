@@ -1,0 +1,336 @@
+.importantImage {
+    width: 50px;
+    height: 50px;
+}
+
+.relativePosition {
+    position:relative
+}
+
+.imagePosition{
+    right: 0px;
+    top: 0px;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+}
+
+#ItemBox {
+    font-size: 30px;
+    color: Blue;
+    border-width:0.1px;
+    border-style:solid;
+    border-color:white;
+    width: 55%;
+    bottom: 25%;
+    margin: auto;
+}
+
+.ItemBoxBorderTop {
+    border-top-left-radius:3rem;
+    border-top-right-radius:3rem;
+}
+
+.ItemBoxBorderBottom {
+    border-bottom-left-radius:3rem;
+    border-bottom-right-radius:3rem;
+}
+
+.selectSort {
+    background-color: lightblue;
+    padding: 10px 15px;
+
+}
+
+.itemBoxText {
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+
+
+.popUpUseless {
+    background: pink;
+}
+
+.popupText {
+    max-width: 50%;
+    word-wrap: break-word;
+
+}
+
+.unselectedMsgType {
+    color:black;
+}
+
+#titleBody {
+    border-radius: 0.1rem;
+    width: 40%;
+    font-size: 2rem;
+    font-family: Arial, serif;
+    color: #6400FF;
+    border: 1px solid #ff4cf5;
+
+}
+
+.defaultFont {
+    font-size:1.5rem;
+    font-family: Arial, serif;
+    color: black;
+}
+
+#inputBox {
+    height: 60px;
+    width: 30rem;
+    font-size: 3rem;
+    border-radius: 0.5rem;
+}
+
+.button {
+    background-image: linear-gradient(red, darkred);
+    color: white;
+    padding: 1rem 1rem;
+    text-align: center;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 0.5rem;
+
+}
+
+#addButton {
+    background-image: linear-gradient(lightblue, darkblue);
+    color: white;
+}
+
+#clearButton {
+    background-image: linear-gradient(lightgreen, green);
+    color: white;
+}
+
+#sortButtonID {
+    background-image: linear-gradient(lightcoral, purple);
+    color: white;
+}
+
+
+
+#clearButtonDisabled {
+    background-image: linear-gradient(grey, darkgrey);
+    color: white;
+}
+
+.closeMe {
+    /*background-image: linear-gradient(red, pink);
+    border-radius: 0.5rem;*/
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    width: 2rem;
+    height: 2rem;
+    border: solid 1px black;
+    font-size: 20px;
+    text-align: center;
+    background-image: linear-gradient(lightgrey, lightgray);
+    border-radius: 0.2rem
+}
+
+.previousButton {
+
+    left: -80px;
+    top: 45%;
+    background-image: linear-gradient(red, pink);
+    border-radius: 0.5rem;
+    position: absolute;
+
+    width: 50px;
+    height: 10%;
+    border: solid 3px blue;
+    font-size: 20px;
+}
+
+.nextButton {
+    background-image: linear-gradient(red, pink);
+    border-radius: 0.5rem;
+    position: absolute;
+    right: -80px;
+    top: 45%;
+    width: 50px;
+    height: 10%;
+    border: solid 3px blue;
+    font-size: 20px;
+}
+
+.boxColor {
+    background-color: lightgrey;
+    animation: changeColorOdd 1s;
+}
+
+@keyframes changeColorOdd {
+    from {
+        background-color: white;
+        color: white;
+    }
+    to {
+        background-color: lightgrey;
+        color:blue;
+    }
+}
+
+@keyframes changeColorEven {
+    from {
+        background-color: white;
+        color: white;
+    }
+    to {
+        background-color: lightcyan;
+        color:blue;
+    }
+}
+
+.spinner {
+    position: relative;
+    border: 16px solid grey;
+    border-top: 16px solid red;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+     0% {transform: rotate(0deg); left:0px; }
+    100% {left:0px; transform: rotate(360deg); }
+}
+
+.beginAdd {
+    color: blue;
+    font-size: 20px;
+}
+
+.chatBoxTopContainer{
+    height:100%
+}
+
+.chatBox {
+    overflow: auto;
+    color: purple;
+    height: 50vh;
+    width: 70%;
+    border-style: solid;
+    word-wrap: break-word;
+    margin:auto;
+}
+
+.chatBoxInput {
+    overflow: auto;
+    height: 85px;
+    width: 70%;
+    border-style: solid;
+    word-wrap: break-word;
+    margin:auto;
+    font-size: 1.5rem;
+}
+
+
+.regularMessage {
+    word-wrap: break-word;
+    font-size: 1.5rem;
+    padding: 8px;
+}
+.regularMessageStyle {
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    border-radius: 0.7rem;
+
+}
+
+.myMessage {
+    word-wrap: break-word;
+    color: black;
+    padding: 8px;
+    font-size: 1.5rem;
+    text-align: right;
+}
+
+.myMessageStyle {
+    background-color: lightgreen;
+    padding: 5px;
+    border-radius: 0.7rem;
+
+}
+
+.alignLeft {
+    text-align: left;
+    display:inline-block
+}
+
+.commentArea {
+    overflow: scroll;
+    overflow-x:hidden;
+    height: 25vh;
+    min-height: 20vh;
+    width: 50vh;
+    word-wrap:break-word;
+    border:1px solid black;
+
+}
+
+.popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0, 0.4);
+}
+
+.popUpInside {
+    border-radius: 0rem;
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    top: 3%;
+    bottom: 3%;
+    margin: auto;
+    background: white;
+    color:black;
+
+    word-wrap:break-word;
+    overflow:scroll;
+    /*overflow-x:hidden;*/
+
+}
+
+.row1{
+    display:flex;
+    flex-direction:row;
+    /*justify-content: space-around;*/
+}
+
+.column1{
+    display:flex;
+    flex-direction:column;
+    width:20%;
+    padding-right: 20px;
+
+}
+
+.column2{
+    display:flex;
+    flex-direction:column;
+    width:80%
+}
+
+.individualStarStyle {
+    max-width: 60%;
+    min-width: 100px;
+    background-color:lightblue;
+}
