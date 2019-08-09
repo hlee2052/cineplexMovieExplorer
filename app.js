@@ -28,8 +28,8 @@ password = process.argv[2]
 console.log("Password supplemented!")
 */
 
-//let mongoURL = "mongodb+srv://m001-student:"+ password+"@sandbox-dd84j.mongodb.net/test?retryWrites=true&w=majority"
-let mongoURL = 'mongodb://localhost:27017'
+let mongoURL = "mongodb+srv://m001-student:"+ password+"@sandbox-dd84j.mongodb.net/test?retryWrites=true&w=majority"
+//let mongoURL = 'mongodb://localhost:27017'
 
 let connectToServer =  () => {
   MongoClient.connect(mongoURL,{ useNewUrlParser: true }, (err, client) => {

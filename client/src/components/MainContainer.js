@@ -1,25 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import IndividualItem from "./IndividualItem";
-
-
 import {
     addMessageToServer,
     addTopMovies,
-    clearList, getLastNComments,
+    getLastNComments,
     getMessages,
-    loadingItems,
-    loadingItemsError, loadLatestComments,
+    loadingItemsError,
     toggleRefresh
 } from '../actions';
 import './style.css'
-import socketIOClient from "socket.io-client";
-import CssBaseline from "@material-ui/core/CssBaseline";
-
-/*import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";*/
-
 import Pagination from "material-ui-flat-pagination";
-
 let proxy = 'https://damp-hollows-78813.herokuapp.com/'
 let url = 'https://www.cineplex.com/api/v1/movies?language=en-us&marketLanguageCodeFilter=true&movieType=1&showTimeType=0&showtimeStatus=0&skip=0&take=160';
 
@@ -27,11 +18,8 @@ let url = 'https://www.cineplex.com/api/v1/movies?language=en-us&marketLanguageC
 //const theme = createMuiTheme();
 const controller = new AbortController();
 const signal = controller.signal;
-const fetchPromise = fetch(proxy+url, {signal});
-
 
 class MainContainer extends React.Component {
-
 
     constructor(props) {
         super(props);
@@ -40,12 +28,9 @@ class MainContainer extends React.Component {
 
     handleClick(offset) {
         this.setState({ offset });
-        //alert(offset)
     }
 
      componentDidMount() {
-
-        console.log("DOES IT RUN TWICE OR STH????")
         // to bypass CORS policy
         // https://www.npmjs.com/package/cors-anywhere
         /*let proxy = 'https://damp-hollows-78813.herokuapp.com/'*/
@@ -70,7 +55,6 @@ class MainContainer extends React.Component {
                         let idVal = this.props.topMovies[i]["_id"]
                         idToSearch.push(idVal)
                     }
-
                     let newObj = {idToSearch}
                     this.setState({idToSearch:newObj})
                     this.props.getMessages('/root', newObj);
@@ -79,33 +63,22 @@ class MainContainer extends React.Component {
                 console.log('well that was loaded...')
                 this.setState({stateArrayLength:1})
                 console.log("the length of array is:" + this.props.listReducer.length)
-
-        })
-
-
-            .then ( () => {
-
+        }).then ( () => {
                 this.props.getLastNComments("/loadLatestComments/3")
                 console.log('load latest comments')
                 //console.log(this.props.latestCommentReducer)
             }).then(() => {
             console.log('load latest comments')
             //console.log(this.props.latestCommentReducer.length)
-        })
-
-
-
-            .catch((error) => {
+        }).catch((error) => {
                 // handle your errors here
-                console.log("bugged...")
+                console.log("Issue with fetching cineplex contents with error: " + error)
             })
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.toggleRefresh !== prevProps.toggleRefresh) {
             this.props.getMessages('/root', this.state.idToSearch);
-            //alert('database populated')
-            console.log("toggle refresh has been detected"+this.props.toggleRefresh)
         }
     }
 
@@ -115,11 +88,9 @@ class MainContainer extends React.Component {
     }
 
     render() {
-
         let itemList = [];
         for (let i=0; i<this.props.listReducer.length; i++) {
             let item = this.props.listReducer[i];
-
             let individualItem = <IndividualItem class="relativePosition" key={uuidGenerator()}
                                                  eachItem={item} arrayIndex={i} id={item["_id"]}/>;
             itemList.push(individualItem)
@@ -136,15 +107,12 @@ class MainContainer extends React.Component {
                 </div>
             )
         }
-
         if (this.props.isLoading) {
            // css loader: based on: https://www.w3schools.com/howto/howto_css_loader.asp
             return (
                 <div className="center spinner"> </div>
             );
-        }
-
-        else if (this.props.listReducer.length===0) {
+        } else if (this.props.listReducer.length===0) {
             return (<div className={"center"}>
                 <div>
                     <br/>
@@ -190,11 +158,8 @@ const mapStateToProps = (state) => { //name is by convention
         loadingListError: state.loadingListError,
         addItemError: state.addItemError,
         addMessageError:state.addMessageError,
-
         isPopUp: state.isPopUp,
         topMovies: state.topMovies,
-        //latestCommentReducer: state.latestCommentReducer
-
     };
 };
 
@@ -206,12 +171,7 @@ const mapDispatchToProps = (dispatch) => {
         addTopMovies: (items) => dispatch(addTopMovies(items)),
         refreshAction: () => dispatch(toggleRefresh()),
         getLastNComments: (url) => dispatch(getLastNComments(url))
-
     };
 };
-
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps) (MainContainer);
