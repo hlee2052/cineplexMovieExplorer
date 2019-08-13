@@ -34,23 +34,6 @@ const styles = () => {
 
 class PopUpScreen extends React.Component {
 
-    componentDidMount() {
-
-
-
-        var a = ip.address();
-        console.log("private ip address", a);
-
-        publicIp.v4()
-            .then((ip) => {
-                console.log(ip)
-            })
-            .catch((error) => {
-                console.log(error)
-            });
-    }
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -83,7 +66,7 @@ class PopUpScreen extends React.Component {
         }
         this.setState({inputWarning: false})
         let updatedURL = url + this.props.id
-        let object = {rating: this.state.currentRating, comment: this.state.currentComment, title: 'default'}
+        let object = {rating: this.state.currentRating, comment: this.state.currentComment, title: 'default', date: new Date(), publicIp:this.state.currentIp}
         object.title = this.props.getSingleItem['name']
         this.props.updateMessage(updatedURL, object);
         this.props.getMessageById(url + this.props.id)

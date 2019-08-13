@@ -63,10 +63,9 @@
 #titleBody {
     border-radius: 0.1rem;
     width: 40%;
-    font-size: 2rem;
+    font-size: 5rem;
     font-family: Arial, serif;
     color: #6400FF;
-    border: 1px solid #ff4cf5;
 }
 
 .defaultFont {

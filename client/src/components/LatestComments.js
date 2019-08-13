@@ -4,6 +4,9 @@ import {getLastNComments} from '../actions';
 import Card from "@material-ui/core/Card";
 import Paper from "@material-ui/core/Paper";
 import Refresh from '@material-ui/icons/Refresh';
+import Typography from "@material-ui/core/Typography";
+import purple from '@material-ui/core/colors/purple';
+import {blue} from "@material-ui/core/colors";
 
 
 class LatestComments extends React.Component {
@@ -14,21 +17,28 @@ class LatestComments extends React.Component {
 
     render() {
         return (<div style={{textAlign: 'center'}}>
-            <div>Latest Comments
+            <div>
+                <Typography variant="h4" component="h5" >Latest Comments</Typography>
+
                 <Refresh onClick={this.refresh}>Refresh </Refresh>
             </div>
-            <div style={{display: "inline-block", textAlign: "left"}}>
+            <div style={{display: "inline-block", textAlign: "left", width:'25%'}}>
+               <Paper>
+                   <div style={{padding:15}}>
                 {this.props.latestCommentReducer.map(item => (
-                    <Paper>
                         <Card>
                             <div>
-                                <div>{item['title']}</div>
-                                <div>Rating: {item['rating']}  </div>
-                                <div>Comment: {item['comment']}</div>
+                                <div>
+                                    <Typography variant="h4" component="h5" >{item['title']}</Typography>
+                                </div>
+                                <div><b>Rating: </b> {item['rating']} </div>
+                                <div><b>Comment: </b> {item['comment']}</div>
                             </div>
                         </Card>
-                    </Paper>
                 ))}
+                   </div>
+            </Paper>
+
             </div>
         </div>)
     }
