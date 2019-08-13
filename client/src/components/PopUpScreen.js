@@ -34,8 +34,6 @@ class PopUpScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // socket endpoints
-            endpoint: "localhost:4001",
             currentWindowId: this.props.id,
             currentRating: 1,
             currentComment: "",
@@ -94,7 +92,6 @@ class PopUpScreen extends React.Component {
         const {classes} = this.props;
 
         if (this.props.singleItemError) {
-            // reset this state for future
             return (<div>
                     <Dialog
                         onClose={this.closeButton}
@@ -181,8 +178,6 @@ class PopUpScreen extends React.Component {
                             <br/>
                             <br/>
                         </div>
-                        <div className={"center"}>
-                        </div>
                     </div>
                 </Dialog>
             </div>)
@@ -202,8 +197,7 @@ class PopUpScreen extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => { //name is by convention
-    //state has entire state of app!!
+const mapStateToProps = (state) => {
     return {
         textPopUp: state.textPopUp,
         getSingleItem: state.getSingleItem,
@@ -211,7 +205,7 @@ const mapStateToProps = (state) => { //name is by convention
         popUpValue: state.popUpValue,
         isPopUp: state.isPopUp,
         listReducer: state.listReducer
-    }; //now it will appear as props
+    };
 };
 
 

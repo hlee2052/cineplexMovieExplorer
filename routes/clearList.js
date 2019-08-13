@@ -6,14 +6,14 @@ var bodyParser = require('body-parser')
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: false }))
 
-/* GET users listing. */
-router.delete('/', function(req, res, next) {
 
+// Currently not being used
+router.delete('/', function(req, res, next) {
     let db = app.getDb()
     db.collection('messages').deleteMany((err, items) => {
 
         if (err) {
-            console.log('omg failed!')
+            console.log('Failed to delete every messages')
         }
         res.json('success');
     })

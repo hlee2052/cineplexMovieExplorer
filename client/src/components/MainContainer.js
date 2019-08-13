@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import IndividualItem from "./IndividualItem";
 import {
     addMessageToServer,
@@ -11,69 +11,57 @@ import {
 } from '../actions';
 import './style.css'
 import Pagination from "material-ui-flat-pagination";
-let proxy = 'https://damp-hollows-78813.herokuapp.com/'
-let url = 'https://www.cineplex.com/api/v1/movies?language=en-us&marketLanguageCodeFilter=true&movieType=1&showTimeType=0&showtimeStatus=0&skip=0&take=160';
 
+// deployed based on https://www.npmjs.com/package/cors-anywhere
+const proxy = 'https://damp-hollows-78813.herokuapp.com/'
 
-//const theme = createMuiTheme();
-const controller = new AbortController();
-const signal = controller.signal;
+// data source
+const url = 'https://www.cineplex.com/api/v1/movies?language=en-us&marketLanguageCodeFilter=true&movieType=1&showTimeType=0&showtimeStatus=0&skip=0&take=160';
 
 class MainContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { offset: 0 , itemPerPage:5, refresh:false, stateArrayLength:0, idToSearch:{}};
+        this.state = {offset: 0, itemPerPage: 5, refresh: false, stateArrayLength: 0, idToSearch: {}};
     }
 
     handleClick(offset) {
-        this.setState({ offset });
+        this.setState({offset});
     }
 
-     componentDidMount() {
-        // to bypass CORS policy
-        // https://www.npmjs.com/package/cors-anywhere
-        /*let proxy = 'https://damp-hollows-78813.herokuapp.com/'*/
-        //let url = 'https://www.cineplex.com/api/v1/movies?language=en-us&marketLanguageCodeFilter=true&movieType=1&showTimeType=0&showtimeStatus=0&skip=0&take=160';
-        /*const timeoutId = setTimeout(() => controller.abort(), 10000);*/
-        fetch(proxy+url)
-              .then(response => response.json())
-              .then((jsonData) => {
-                    let url = '/addMessage'
-                    let arr1 = []
-                    for (let i=0; i<jsonData['data'].length; i++) {
-                        let object= jsonData['data'][i]
-                        object.comments = [{rating:-1, comment:'yay new movie'}]
-                        arr1.push(object)
-                    }
+    componentDidMount() {
+        fetch(proxy + url)
+            .then(response => response.json())
+            .then((jsonData) => {
+                let url = '/addMessage'
+                let arr1 = []
+                for (let i = 0; i < jsonData['data'].length; i++) {
+                    let dataObject = jsonData['data'][i]
+                    dataObject.comments = [{rating: -1, comment: 'New Movie'}]
+                    arr1.push(dataObject)
+                }
 
-                    this.props.addMessageToServer(url, arr1)
-                    this.props.addTopMovies(arr1);
+                this.props.addMessageToServer(url, arr1)
+                this.props.addTopMovies(arr1);
 
-                    let idToSearch = []
-                    for (let i=0; i<this.props.topMovies.length; i++) {
-                        let idVal = this.props.topMovies[i]["_id"]
-                        idToSearch.push(idVal)
-                    }
-                    let newObj = {idToSearch}
-                    this.setState({idToSearch:newObj})
-                    this.props.getMessages('/root', newObj);
-                    console.log('successfully call cineplex')
-            }).then(()=> {
-                console.log('well that was loaded...')
-                this.setState({stateArrayLength:1})
-                console.log("the length of array is:" + this.props.listReducer.length)
-        }).then ( () => {
-                this.props.getLastNComments("/loadLatestComments/3")
-                console.log('load latest comments')
-                //console.log(this.props.latestCommentReducer)
-            }).then(() => {
-            console.log('load latest comments')
-            //console.log(this.props.latestCommentReducer.length)
-        }).catch((error) => {
-                // handle your errors here
-                console.log("Issue with fetching cineplex contents with error: " + error)
+                let idToSearch = []
+                for (let i = 0; i < this.props.topMovies.length; i++) {
+                    let idVal = this.props.topMovies[i]["_id"]
+                    idToSearch.push(idVal)
+                }
+
+                let idListObject = {idToSearch}
+                this.setState({idToSearch: idListObject})
+                this.props.getMessages('/root', idListObject);
             })
+            .then(() => {
+                this.setState({stateArrayLength: 1})
+            }).then(() => {
+            this.props.getLastNComments("/loadLatestComments/3")
+        }).then(() => {
+        }).catch((error) => {
+            console.log("Issue with fetching cineplex contents with error: " + error)
+        })
     }
 
     componentDidUpdate(prevProps) {
@@ -89,7 +77,7 @@ class MainContainer extends React.Component {
 
     render() {
         let itemList = [];
-        for (let i=0; i<this.props.listReducer.length; i++) {
+        for (let i = 0; i < this.props.listReducer.length; i++) {
             let item = this.props.listReducer[i];
             let individualItem = <IndividualItem class="relativePosition" key={uuidGenerator()}
                                                  eachItem={item} arrayIndex={i} id={item["_id"]}/>;
@@ -102,17 +90,17 @@ class MainContainer extends React.Component {
 
         if (this.props.loadingListError) {
             return (
-                <div className={'center'}> <p>Failed To Load movies</p>
+                <div className={'center'}><p>Failed To Load movies</p>
                     <button onClick={this.tryAgain}>Try again</button>
                 </div>
             )
         }
         if (this.props.isLoading) {
-           // css loader: based on: https://www.w3schools.com/howto/howto_css_loader.asp
+            // css loader: based on: https://www.w3schools.com/howto/howto_css_loader.asp
             return (
-                <div className="center spinner"> </div>
+                <div className="center spinner"></div>
             );
-        } else if (this.props.listReducer.length===0) {
+        } else if (this.props.listReducer.length === 0) {
             return (<div className={"center"}>
                 <div>
                     <br/>
@@ -120,21 +108,20 @@ class MainContainer extends React.Component {
                         Loading data...
                     </p>
                 </div>
-
             </div>)
         } else return (
             <div>
-                <div>{itemList.slice(this.state.offset, this.state.offset+this.state.itemPerPage)}</div>
-                {this.props.isPopUp?null:
+                <div>{itemList.slice(this.state.offset, this.state.offset + this.state.itemPerPage)}</div>
+                {this.props.isPopUp ? null :
                     <div className={"center"}>
-                    <Pagination
-                        limit={this.state.itemPerPage}
-                        offset={this.state.offset}
-                        total={itemList.length}
-                        onClick={(e, offset) => this.handleClick(offset)}
-                        size={"large"}
-                    />
-                </div>}
+                        <Pagination
+                            limit={this.state.itemPerPage}
+                            offset={this.state.offset}
+                            total={itemList.length}
+                            onClick={(e, offset) => this.handleClick(offset)}
+                            size={"large"}
+                        />
+                    </div>}
             </div>
 
         )
@@ -144,7 +131,7 @@ class MainContainer extends React.Component {
 // UUID generator:
 //credit: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
 function uuidGenerator() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r && 0x3 | 0x8);
         return v.toString(16);
     });
@@ -157,7 +144,7 @@ const mapStateToProps = (state) => { //name is by convention
         isLoading: state.itemsIsLoading,
         loadingListError: state.loadingListError,
         addItemError: state.addItemError,
-        addMessageError:state.addMessageError,
+        addMessageError: state.addMessageError,
         isPopUp: state.isPopUp,
         topMovies: state.topMovies,
     };
@@ -166,7 +153,7 @@ const mapStateToProps = (state) => { //name is by convention
 const mapDispatchToProps = (dispatch) => {
     return {
         getMessages: (url, body) => dispatch(getMessages(url, body)),
-        loadingItemsError: (bool)=>dispatch(loadingItemsError(bool)),
+        loadingItemsError: (bool) => dispatch(loadingItemsError(bool)),
         addMessageToServer: (url, obj) => dispatch(addMessageToServer(url, obj)),
         addTopMovies: (items) => dispatch(addTopMovies(items)),
         refreshAction: () => dispatch(toggleRefresh()),
@@ -174,4 +161,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (MainContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

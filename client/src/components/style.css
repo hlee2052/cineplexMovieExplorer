@@ -114,8 +114,6 @@
 }
 
 .closeMe {
-    /*background-image: linear-gradient(red, pink);
-    border-radius: 0.5rem;*/
     position: absolute;
     right: 2rem;
     top: 2rem;
@@ -126,32 +124,6 @@
     text-align: center;
     background-image: linear-gradient(lightgrey, lightgray);
     border-radius: 0.2rem
-}
-
-.previousButton {
-
-    left: -80px;
-    top: 45%;
-    background-image: linear-gradient(red, pink);
-    border-radius: 0.5rem;
-    position: absolute;
-
-    width: 50px;
-    height: 10%;
-    border: solid 3px blue;
-    font-size: 20px;
-}
-
-.nextButton {
-    background-image: linear-gradient(red, pink);
-    border-radius: 0.5rem;
-    position: absolute;
-    right: -80px;
-    top: 45%;
-    width: 50px;
-    height: 10%;
-    border: solid 3px blue;
-    font-size: 20px;
 }
 
 .boxColor {
@@ -181,6 +153,7 @@
     }
 }
 
+/*For loading items*/
 .spinner {
     position: relative;
     border: 16px solid grey;
@@ -236,7 +209,6 @@
     color: white;
     padding: 5px;
     border-radius: 0.7rem;
-
 }
 
 .myMessage {
@@ -273,7 +245,6 @@
 .row1{
     display:flex;
     flex-direction:row;
-    /*justify-content: space-around;*/
 }
 
 .column1{
@@ -281,7 +252,6 @@
     flex-direction:column;
     width:20%;
     padding-right: 20px;
-
 }
 
 .column2{

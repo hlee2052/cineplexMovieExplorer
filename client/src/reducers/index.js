@@ -1,46 +1,33 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import Util from '../components/Util.js'
 
-
-// THESE DATE SHOULD BE INSIDE
-/*const initialMessage = [{name:'Pooh the Bear', popUp:false, type:'important', date:new Date(2011, 10, 13)},
-                        {name:'Mickey the Rat', popUp:false, type:'normal', date:new Date(1990, 11,19)},
-                        {name:'Dumbo the Elephant', popUp:false, type: "useless", date:new Date(1999, 3,11)},
-                        {name:'Goofy the Wolf', popUp:false, type: "important", date:new Date(2015, 10, 13)}
-                        ];*/
-
-
-const sortOption = (str='date', action) => {
-    if (action.type==='SORT_OPTION') {
+const sortOption = (str = 'date', action) => {
+    if (action.type === 'SORT_OPTION') {
         return action.payload
     }
     return str
 }
 
 const textBoxReducer = (str = '', action) => {
-    if (action.type===Util.UPDATE_TEXT_BOX) {
+    if (action.type === Util.UPDATE_TEXT_BOX) {
         return action.payloadString
     }
     return str
 };
-
 
 const textBoxPopUpReducer = (str = '', action) => {
-    if (action.type==="UPDATE_POP_UP_TEXT_BOX") {
+    if (action.type === "UPDATE_POP_UP_TEXT_BOX") {
         return action.payloadString
     }
     return str
 };
 
-
-
-
 const popUpIndexReducer = (str = '', action) => {
-    if (action.type==="POP_UP_INDEX") {
+    if (action.type === "POP_UP_INDEX") {
         return action.payload
     }
 
-    if (action.type==="CLOSE_POP_UP_INDEX") {
+    if (action.type === "CLOSE_POP_UP_INDEX") {
         return ''
     }
     return str
@@ -54,6 +41,7 @@ export function loadingListError(state = false, action) {
             return state;
     }
 }
+
 export function loadingList(state = false, action) {
     switch (action.type) {
         case 'LOADING_LIST':
@@ -63,11 +51,8 @@ export function loadingList(state = false, action) {
     }
 }
 
-
-
-
 const latestCommentReducer = (arr = [], action) => {
-    if (action.type==='LOAD_COMMENTS_SUCCESS') {
+    if (action.type === 'LOAD_COMMENTS_SUCCESS') {
         return action.payload
     }
 
@@ -76,17 +61,15 @@ const latestCommentReducer = (arr = [], action) => {
 
 const listReducer = (arr = [], action) => {
 
-    if (action.type==='LOAD_LIST_SUCCESS') {
+    if (action.type === 'LOAD_LIST_SUCCESS') {
         return action.payload;
     }
 
-    if (action.type==='CLEAR_LIST') {
+    if (action.type === 'CLEAR_LIST') {
         return arr = [];
     }
 
-
     if (action.type === "SORT_BY_ALPHABET") {
-
         let newArray = arr.slice();
         newArray.sort((a, b) => {
             return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0
@@ -95,7 +78,6 @@ const listReducer = (arr = [], action) => {
     }
 
     if (action.type === "SORT_BY_DATE") {
-
         let newArray = arr.slice();
         newArray.sort((a, b) => {
             return (a.date > b.date) ? 1 : (a.date < b.date) ? -1 : 0
@@ -124,15 +106,6 @@ export function getSingleItemError(state = false, action) {
             return state;
     }
 }
-
-/*export function deleteMessage(state = '', action) {
-
-    if (action.type===Util.DELETE_MESSAGE) {
-        return ''
-    }
-    return state
-
-}*/
 
 export function setSingleItemPopUp(state = false, action) {
     switch (action.type) {
@@ -166,8 +139,8 @@ export function topMovies(arr = [], action) {
     switch (action.type) {
         case 'ADD_TOP_MOVIES':
             let tempArr = []
-            for (let i=0; i<action.payload.length; i++) {
-                let object = {_id:action.payload[i]['id']}
+            for (let i = 0; i < action.payload.length; i++) {
+                let object = {_id: action.payload[i]['id']}
                 tempArr = [...tempArr, object]
             }
             return tempArr
@@ -177,24 +150,19 @@ export function topMovies(arr = [], action) {
 }
 
 
-
-
-
 export default combineReducers({
-    text:textBoxReducer,
+    text: textBoxReducer,
     textPopUp: textBoxPopUpReducer,
     optionValue: sortOption,
     popUpValue: popUpIndexReducer,
     toggleRefresh: toggleRefresh,
-    getSingleItem:getSingleItem,
+    getSingleItem: getSingleItem,
     getSingleItemError: getSingleItemError,
     isPopUp: setSingleItemPopUp,
     listReducer: listReducer,
     loadingListError: loadingListError,
     itemsIsLoading: loadingList,
-   // deleteMessage:deleteMessage,
-    addMessageError:addMessageError,
-
+    addMessageError: addMessageError,
     topMovies: topMovies,
-    latestCommentReducer:latestCommentReducer
+    latestCommentReducer: latestCommentReducer
 });

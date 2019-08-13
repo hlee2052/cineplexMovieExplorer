@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.css'
 
-
 class Title extends React.Component {
 
     render() {

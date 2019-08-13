@@ -10,11 +10,11 @@ class mainStructures extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { currentPage: 'MainContainer'};
+        this.state = {currentPage: 'MainContainer'};
     }
 
     changePage = (page) => {
-        this.setState({currentPage:page})
+        this.setState({currentPage: page})
     }
 
     render() {
@@ -22,19 +22,17 @@ class mainStructures extends React.Component {
             <div>
                 <div className={"center"}>
                     <span>
-                         <Button color="primary"  variant="outlined" onClick={()=>this.changePage('MainContainer')}>
+                         <Button color="primary" variant="outlined" onClick={() => this.changePage('MainContainer')}>
                               Movies
                         </Button>
-                         <Button color="primary" variant="outlined" onClick={()=>this.changePage('Chat')}>
+                         <Button color="primary" variant="outlined" onClick={() => this.changePage('Chat')}>
                               Live Chat
                         </Button>
-
                     </span>
-
                 </div>
                 <LatestComments/>
-                {this.state.currentPage==="MainContainer"?<MainContainer/>:null}
-                {this.state.currentPage==="Chat"?<Chat/>:null}
+                {this.state.currentPage === "MainContainer" ? <MainContainer/> : null}
+                {this.state.currentPage === "Chat" ? <Chat/> : null}
             </div>
         )
     }

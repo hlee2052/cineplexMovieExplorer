@@ -4,19 +4,18 @@ let app = require('../app.js')
 var bodyParser = require('body-parser')
 
 router.use(bodyParser.json())
-router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.urlencoded({extended: false}))
 
 
-/* GET users listing. */
-router.put('/:id', function(req, res, next) {
+// Update the movie content, eg comments and rating
+router.put('/:id', function (req, res, next) {
 
-    let messageId =  parseInt(req.params.id)
-    let queryObject ={}
+    let messageId = parseInt(req.params.id)
+    let queryObject = {}
     queryObject = req.body
-    console.log("UPDATE FIELD!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     let db = app.getDb()
-    db.collection('messages').updateOne({_id:messageId}, {$push:{comments:queryObject} }, (error, val) => {
+    db.collection('messages').updateOne({_id: messageId}, {$push: {comments: queryObject}}, (error, val) => {
         if (error) {
             console.log("Failed to update existing messages")
         }
@@ -28,7 +27,6 @@ router.put('/:id', function(req, res, next) {
             }
             res.json('ok')
         })
-        //res.json('ok')
     })
 });
 
