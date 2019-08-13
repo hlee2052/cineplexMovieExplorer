@@ -15,6 +15,9 @@ import StarRatings from 'react-star-ratings';
 import './style.css'
 import {compose} from "redux";
 
+const publicIp = require('public-ip');
+var ip = require("ip");
+
 const url = "/message/"
 const styles = () => {
     return ({
@@ -30,6 +33,23 @@ const styles = () => {
 
 
 class PopUpScreen extends React.Component {
+
+    componentDidMount() {
+
+
+
+        var a = ip.address();
+        console.log("private ip address", a);
+
+        publicIp.v4()
+            .then((ip) => {
+                console.log(ip)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
 
     constructor(props) {
         super(props);

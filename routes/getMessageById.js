@@ -13,7 +13,6 @@ router.get('/:id', function (req, res, next) {
     console.log("Trying to get detailed message for the messageID: " + req.params.id)
     let db = app.getDb()
     db.collection('messages').findOne({_id: messageId}).then(val => {
-        console.log("The message retrieved is " + JSON.stringify(val))
         if (val.length === 0) {
             console.log("The element you want to get no longer exists!")
             res.status(404).send("Message is not found!!")
