@@ -118,24 +118,26 @@ class PopUpScreen extends React.Component {
                     <div className={"alignLeft"}>
                         <h1 className={"popupText"}>{this.props.getSingleItem['name']}</h1>
                         <img src={this.props.getSingleItem['mediumPosterImageUrl']} alt={'movieImage'}/>
-                        <div> Average Rating: <StarRatings
+                        <div> <b>Average Rating: </b> <StarRatings
                             rating={this.getAverageRating()}
                             starDimension="20px"
                             starSpacing="5px"
                             starRatedColor="purple"/>
                         </div>
-                        <div>Release date : {this.props.getSingleItem['releaseDate'].toString().split("T")[0]}</div>
-                        <div>Duration: {this.props.getSingleItem['duration']}</div>
+                        <br/>
                         {this.props.getSingleItem['isNowPlaying'] ?
-                            <div>
-                                Now Playing
+                            <div style={{fontSize:20}}>
+                                Now Playing!
                             </div>
-                            : <div>
-                                Coming Soon
+                            : <div style={{fontSize:20}}>
+                                Coming Soon!
                             </div>
                         }
-                        <div>Formats: {this.props.getSingleItem['formats'].toString()}</div>
-                        {this.props.getSingleItem['isAvailableInStore'] ? <div>Available in store</div> : null}
+
+                        <div><b>Release date : </b> {this.props.getSingleItem['releaseDate'].toString().split("T")[0]}</div>
+                        <div><b>Duration: </b> {this.props.getSingleItem['duration']}</div>
+                        <div><b>Formats: </b> {this.props.getSingleItem['formats'].toString()}</div>
+                        {this.props.getSingleItem['isAvailableInStore'] ? <div><b>Available in store!</b></div> : null}
                         <br/>
                         <br/>
                         <div>
