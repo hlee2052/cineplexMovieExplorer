@@ -22,7 +22,7 @@ class LatestComments extends React.Component {
 
                 <Refresh onClick={this.refresh}>Refresh </Refresh>
             </div>
-            <div style={{display: "inline-block", textAlign: "left", width:'25%'}}>
+            <div style={{display: "inline-block", textAlign: "left", width:'75%'}}>
                <Paper>
                    <div style={{padding:15}}>
                 {this.props.latestCommentReducer.map(item => (
