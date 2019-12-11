@@ -140,7 +140,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>/5</find>
       <find>socket.on</find>
       <find>socket</find>
       <find>dialog</find>
@@ -170,6 +169,7 @@
       <find>Release date</find>
       <find>now playing</find>
       <find>latestCo</find>
+      <find>comment</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
