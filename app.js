@@ -1,8 +1,8 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
 
 const MongoClient = require('mongodb').MongoClient
 let process = require('process')
@@ -45,8 +45,8 @@ let clearListRouter = require('./routes/clearList');
 let rootRouter = require('./routes/root');
 let loadLatestCommentRouter = require('./routes/loadLatestComments')
 
-var bodyParser = require('body-parser')
-var app = express();
+let bodyParser = require('body-parser')
+let app = express();
 
 const server = http.createServer(app)
 server.listen(port, () => console.log(`Listening on port ${port}`))
